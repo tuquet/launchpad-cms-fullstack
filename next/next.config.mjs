@@ -17,6 +17,12 @@ const nextConfig = {
         pathname: '/uploads/**',
       },
       {
+        protocol: 'http',
+        hostname: 'strapi',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
+      {
         protocol: 'https',
         hostname: process.env.IMAGE_HOSTNAME || 'localhost',
         pathname: '/uploads/**',
