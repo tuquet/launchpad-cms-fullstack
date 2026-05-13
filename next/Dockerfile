@@ -8,7 +8,7 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* ./
-RUN corepack enable && yarn install
+RUN corepack enable && yarn install --network-timeout 600000
 
 # Rebuild the source code only when needed
 FROM base AS builder
