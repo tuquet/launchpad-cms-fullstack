@@ -1,65 +1,68 @@
+/// <reference types="node" />
 import * as fs from 'fs';
 import * as path from 'path';
-import { v4 as uuidv4 } from 'uuid';
+import * as crypto from 'crypto';
+import process from 'process';
 
-const TO_BE_MODIFIED_KEY = /tobemodified/g;
+/**
+ * Generates a high-entropy random string for security keys
+ */
+const generateSecret = (bytes = 32) => crypto.randomBytes(bytes).toString('base64');
 
-const generateSecret = () => uuidv4().replace(/-/g, '_');
+/**
+ * Regex to find placeholders in .env.example
+ * Matches 'tobemodified', 'toBeModified', etc.
+ */
+const PLACEHOLDER_REGEX = /tobemodified[a-zA-Z0-9]*/gi;
 
 function copyEnvFile(targetDir: string): void {
-  // Ensure targetDir is trimmed
-  targetDir = targetDir.trim();
+  const absoluteTargetDir = path.resolve(targetDir.trim());
+  const examplePath = path.join(absoluteTargetDir, '.env.example');
+  const envPath = path.join(absoluteTargetDir, '.env');
 
-  const examplePath: string = path.join(targetDir, '.env.example');
-  const envPath: string = path.join(targetDir, '.env');
+  console.log(`\n--- Processing Environment File for: ${path.basename(absoluteTargetDir) || 'Root'} ---`);
 
-  console.log('Attempting to copy from:', examplePath);
-  console.log('To:', envPath);
-  // Check if .env.example exists
-  fs.access(examplePath, fs.constants.F_OK, (err: Error | null) => {
-    if (err) {
-      console.error(`.env.example file does not exist in ${targetDir}`);
-      return;
-    }
+  // 1. Check if .env.example exists
+  if (!fs.existsSync(examplePath)) {
+    console.error(`[Error] .env.example not found at: ${examplePath}`);
+    return;
+  }
 
-    // .env.example exists, now check for .env
-    fs.access(envPath, fs.constants.F_OK, (err: Error | null) => {
-      if (err) {
-        // .env file does not exist, copy .env.example to .env
-        fs.copyFile(examplePath, envPath, (err: Error | null) => {
-          if (err) {
-            console.error('Error occurred:', err);
-            return;
-          }
-          console.log(`.env.example has been copied to ${envPath}`);
+  // 2. Check if .env already exists (Run-once protection)
+  if (fs.existsSync(envPath)) {
+    console.log(`[Skip] .env already exists at: ${envPath}. No changes made.`);
+    return;
+  }
 
-          // Update env variables with generated secrets
-          const currentEnv = fs.readFileSync(envPath, 'utf8');
-        
-          // Replace all occurrences with a new secret
-          const updatedEnv = currentEnv
-            .replace(TO_BE_MODIFIED_KEY, generateSecret)
+  try {
+    // 3. Read example file
+    const exampleContent = fs.readFileSync(examplePath, 'utf8');
 
-          // Rewrite .env file with updated env variables
-          fs.writeFileSync(envPath, updatedEnv, 'utf8');
-
-          console.log(`${envPath} has been updated with new secrets.`);
-        });
-      } else {
-        // .env file exists, no action needed
-        console.log(
-          `.env file already exists in ${targetDir}, no action taken.`
-        );
-      }
+    // 4. Replace placeholders with unique random secrets
+    // We use a function callback in .replace() to ensure each replacement gets a NEW unique secret
+    const updatedContent = exampleContent.replace(PLACEHOLDER_REGEX, (match: string) => {
+        // Special handling for APP_KEYS which usually expect shorter or multiple keys
+        // but for Strapi, a 32-byte base64 is excellent for any secret field.
+        const secret = generateSecret();
+        console.log(`  > Generated new secret for placeholder: ${match}`);
+        return secret;
     });
-  });
+
+    // 5. Write the new .env file
+    fs.writeFileSync(envPath, updatedContent, 'utf8');
+    console.log(`[Success] Created ${envPath} with fresh random secrets.`);
+
+  } catch (error) {
+    console.error(`[Error] Failed to process ${envPath}:`, error);
+  }
 }
 
-// Get the directory path from the command line argument and trim whitespace
-const directoryPath: string | undefined = process.argv[2]?.trim();
+// Support calling with multiple paths or a single path
+const paths = process.argv.slice(2);
 
-if (directoryPath) {
-  copyEnvFile(directoryPath);
+if (paths.length > 0) {
+  paths.forEach((p: string) => copyEnvFile(p));
 } else {
-  console.error('Please provide a directory path as an argument.');
+  // Default to root if no path provided
+  copyEnvFile('.');
 }
