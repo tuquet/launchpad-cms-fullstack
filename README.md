@@ -31,7 +31,7 @@ To avoid port conflicts on local machines, we use different port ranges for Dock
 ### Step 1: Start the Database
 Ensure only the Database and DB UI are running in Docker:
 ```powershell
-docker-compose up -d strapiDB adminer
+docker compose up -d launchpad-db launchpad-adminer
 ```
 
 ### Step 2: Setup Environments
@@ -56,19 +56,19 @@ yarn dev
 
 ### Spin up everything
 ```powershell
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 ### 🔄 Updating Changes to Docker
 If you modify Code or Environment Variables, follow this workflow to ensure Docker is synced:
-1. **Down**: `docker-compose down`
-2. **Build**: `docker-compose build nextjs strapi` (Bypass cache to bake in new Env vars with --no-cache args)
-3. **Up**: `docker-compose up -d`
+1. **Down**: `docker compose down`
+2. **Build**: `docker compose build nextjs strapi` (Bypass cache to bake in new Env vars with --no-cache args)
+3. **Up**: `docker compose up -d`
 
 ### 🧪 Troubleshooting "Failed to fetch module"
 If the Strapi Admin UI shows blank/broken pages, it's likely a hydration issue. Run a clean rebuild:
 ```powershell
-docker-compose down -v
+docker compose down -v
 docker-compose build --no-cache
 docker-compose up -d
 ```
@@ -116,6 +116,7 @@ docker exec -it -u root strapi yarn seed
 ## Resources
 - [Strapi Documentation](https://docs.strapi.io)
 - [Next.js Documentation](https://nextjs.org/docs)
+- [**API & Frontend-Backend Guide**](./DOCS_API.md) 🚀
 
 
 [Docs](https://docs.strapi.io) • [Discord](https://discord.strapi.io) • [YouTube](https://www.youtube.com/c/Strapi/featured) • [Strapi Design System](https://design-system.strapi.io/) • [Marketplace](https://market.strapi.io/) • [Cloud Free Trial](https://cloud.strapi.io)
