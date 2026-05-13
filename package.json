@@ -5,14 +5,14 @@
   "type": "module",
   "scripts": {
     "prepare": "husky",
-    "next": "yarn dev --prefix ../next/",
-    "strapi": "yarn dev --prefix ../strapi/",
-    "setup:env": "node --loader ts-node/esm ./scripts/copy-env.mts . ./next ./strapi",
+    "next": "cd next && yarn dev",
+    "strapi": "cd strapi && yarn develop",
+    "setup:env": "node --no-warnings=ExperimentalWarning --loader ts-node/esm ./scripts/copy-env.mts . ./next ./strapi",
     "setup:next": "cd next && yarn",
     "setup:strapi": "cd strapi && yarn",
     "setup:db": "docker compose up -d launchpad-db launchpad-adminer",
     "setup": "yarn setup:env && yarn setup:db && yarn && yarn setup:next && yarn setup:strapi && echo '\n--- Setup Completed! Run \"yarn dev\" to start. ---'",
-    "dev": "yarn concurrently \"cd strapi && yarn develop\" \"npx wait-on http://localhost:1338 && cd next && yarn dev\"",
+    "dev": "yarn concurrently \"cd strapi && yarn develop\" \"npx wait-on http://localhost:1337 && cd next && yarn dev\"",
     "seed": "cd strapi && yarn strapi import -f ./data/export_20250116105447.tar.gz --force",
     "export": "cd strapi && yarn strapi export --no-encrypt -f ./data/export_20250116105447",
     "repo:upstream": "git fetch upstream && git merge upstream/main",
@@ -25,6 +25,7 @@
     "fix:lock": "npx rimraf next/.next/dev/lock"
   },
   "dependencies": {
+    "@strapi/plugin-documentation": "^5.45.1",
     "@types/node": "^22.5.2",
     "concurrently": "^8.2.2",
     "typescript": "^5.0.0",

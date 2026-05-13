@@ -13,12 +13,10 @@ Do not build your images directly on a low-RAM VPS! We highly recommend using th
 
 ## 🛠️ Environment Matrix
 
-To avoid port conflicts on local machines, we use different port ranges for Docker and Local development.
-
 | Service | Local Dev (Non-Docker) | Docker (Production-ready) |
 | :--- | :--- | :--- |
-| **Strapi Backend** | [http://localhost:1338](http://localhost:1338) | [http://localhost:1337](http://localhost:1337) |
-| **Next.js Frontend** | [http://localhost:3002](http://localhost:3002) | [http://localhost:3000](http://localhost:3000) |
+| **Strapi Backend** | [http://localhost:1337](http://localhost:1337) | [http://localhost:1337](http://localhost:1337) |
+| **Next.js Frontend** | [http://localhost:3000](http://localhost:3000) | [http://localhost:3000](http://localhost:3000) |
 | **PostgreSQL** | `localhost:5430` | `localhost:5432` (Internal) |
 | **Adminer (DB UI)** | [http://localhost:8080](http://localhost:8080) | [http://localhost:8080](http://localhost:8080) |
 | **Swagger Docs** | [/documentation/v1.0.0](/documentation/v1.0.0) | [/documentation/v1.0.0](/documentation/v1.0.0) |
@@ -46,8 +44,8 @@ Start both Strapi and Next.js concurrently:
 ```powershell
 yarn dev
 ```
-- **Strapi** will be available at `1338`.
-- **Next.js** will be available at `3002`.
+- **Strapi** will be available at `1337`.
+- **Next.js** will be available at `3000`.
 
 ---
 
@@ -97,7 +95,7 @@ docker exec -it -u root strapi yarn seed
 ## 📝 Best Practices & Knowledge base
 
 - **Image URL Logic**: We use `NEXT_PUBLIC_STRAPI_URL` to ensure the browser loads images from the correct endpoint, bypassing Docker's internal networking issues.
-- **Port Conflicts**: Port `3000`/`1337` are reserved for Docker. Port `3002`/`1338` are for Local Dev. 
+- **Port Management**: Both Local and Docker use `3000` for Frontend and `1337` for Backend to ensure consistency.
 - **Git Hygiene**: 
     - Don't commit `.env` files.
     - `src/extensions/documentation` files can be committed if you want to track API changes, or ignored if you want Strapi to auto-generate them.

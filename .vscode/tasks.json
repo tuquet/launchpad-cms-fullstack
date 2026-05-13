@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "🚀 [LaunchPad] Start Full Stack (Strapi + Next)",
+      "label": "🚀 Dev: Full Stack (1337, 3000)",
       "type": "shell",
       "command": "yarn dev",
       "group": {
@@ -17,7 +17,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🛠️ [LaunchPad] Initial Setup (Env + Docker DB)",
+      "label": "🛠️ Setup: Env & DB",
       "type": "shell",
       "command": "yarn setup",
       "presentation": {
@@ -27,7 +27,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🌱 [LaunchPad] Seed Database",
+      "label": "🌱 Seed: Database",
       "type": "shell",
       "command": "yarn seed",
       "presentation": {
@@ -37,7 +37,7 @@
       "problemMatcher": []
     },
     {
-      "label": "📦 [LaunchPad] Backend Only (Strapi)",
+      "label": "📦 Dev: Backend (1337)",
       "type": "shell",
       "command": "yarn strapi",
       "presentation": {
@@ -47,7 +47,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🌐 [LaunchPad] Frontend Only (Next.js)",
+      "label": "🌐 Dev: Frontend (3000)",
       "type": "shell",
       "command": "yarn next",
       "presentation": {
@@ -57,9 +57,9 @@
       "problemMatcher": []
     },
     {
-      "label": "🧹 [LaunchPad] Clean Cache",
+      "label": "🧹 Clean & Restart",
       "type": "shell",
-      "command": "npx kill-port 3000 1338 && yarn clean && npx rimraf next/.next/dev/lock",
+      "command": "npx kill-port 3000 1337 && yarn clean && npx rimraf next/.next/dev/lock && yarn dev",
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
