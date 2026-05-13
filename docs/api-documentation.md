@@ -7,14 +7,14 @@ Tài liệu này cung cấp cái nhìn tổng quan về cách Next.js (Frontend)
 ## 1. Kiến trúc Tổng quan
 Dự án sử dụng mô hình **Headless CMS**:
 - **Backend (Strapi 5)**: Quản lý nội dung, cung cấp RESTful API và Admin Panel.
-- **Frontend (Next.js 15)**: Tiêu thụ API, render giao diện và tối ưu hóa hiệu năng (Server Components & Caching).
+- **Frontend (Next.js 16)**: Tiêu thụ API, render giao diện và tối ưu hóa hiệu năng (Server Components & Caching).
 
 ## 2. Cấu hình Kết nối
 Frontend giao tiếp với Backend thông qua các biến môi trường được cấu hình trong file `.env`:
 
 | Biến môi trường | Giá trị mặc định | Mô tả |
 | :--- | :--- | :--- |
-| `NEXT_PUBLIC_API_URL` | `http://localhost:1338` | URL gốc của Strapi API. |
+| `NEXT_PUBLIC_API_URL` | `http://localhost:1337` | URL gốc của Strapi API. |
 | `PREVIEW_SECRET` | (Ngẫu nhiên) | Key dùng để xác thực chế độ xem trước (Draft Mode). |
 
 **Base API Path**: `${NEXT_PUBLIC_API_URL}/api`
@@ -62,7 +62,7 @@ const articles = await fetchCollectionType('articles', {
 ---
 
 ## 5. Cơ chế Caching & Revalidation
-Dự án tận dụng tính năng **Next.js 15 Caching** để đạt hiệu năng tối đa:
+Dự án tận dụng tính năng **Next.js 16 Caching** để đạt hiệu năng tối đa:
 
 - **Cache Life**: Mặc định nội dung được cache trong 15 phút (có thể cấu hình lại).
 - **Cache Tags**: Mỗi yêu cầu được gắn tag (ví dụ: `collection-articles`).
@@ -72,5 +72,5 @@ Dự án tận dụng tính năng **Next.js 15 Caching** để đạt hiệu nă
 
 ## 6. Lưu ý cho Developer
 - **Populate**: Strapi 5 mặc định không trả về các quan hệ (Media, Component, Relation). Bạn **PHẢI** khai báo `populate` trong query.
-- **Admin Panel**: Truy cập `http://localhost:1338/admin` để quản lý nội dung và tạo API Tokens.
+- **Admin Panel**: Truy cập `http://localhost:1337/admin` để quản lý nội dung và tạo API Tokens.
 - **Environment**: Đảm bảo file `.env` ở root và các folder con đã được tạo thông qua lệnh `yarn setup`.
