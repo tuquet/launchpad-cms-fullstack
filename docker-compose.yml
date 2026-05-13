@@ -10,7 +10,7 @@ services:
     env_file: .env
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
-      DATABASE_HOST: strapiDB
+      DATABASE_HOST: launchpad-db
       DATABASE_PORT: ${DATABASE_PORT}
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
@@ -27,11 +27,11 @@ services:
     ports:
       - "1337:1337"
     depends_on:
-      strapiDB:
+      launchpad-db:
         condition: service_healthy
 
-  strapiDB:
-    container_name: strapiDB
+  launchpad-db:
+    container_name: launchpad-db
     image: postgres:16-alpine
     platform: linux/amd64
     restart: unless-stopped
@@ -78,16 +78,16 @@ services:
       - nextjs
       - strapi
 
-  adminer:
-    container_name: adminer
+  launchpad-adminer:
+    container_name: launchpad-adminer
     image: adminer:latest
     restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
-      ADMINER_DEFAULT_SERVER: strapiDB
+      ADMINER_DEFAULT_SERVER: launchpad-db
     depends_on:
-      - strapiDB
+      - launchpad-db
 
 volumes:
   strapi-data:
