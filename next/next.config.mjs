@@ -34,6 +34,15 @@ const nextConfig = {
     ],
   },
   pageExtensions: ['ts', 'tsx'],
+  async rewrites() {
+    const strapiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://strapi:1337';
+    return [
+      {
+        source: '/uploads/:path*',
+        destination: `${strapiUrl}/uploads/:path*`,
+      },
+    ];
+  },
   async redirects() {
     if (process.env.NEXT_PUBLIC_API_URL === undefined) {
       console.warn(
