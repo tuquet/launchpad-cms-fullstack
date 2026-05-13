@@ -19,7 +19,10 @@
     "check:format": "prettier . --check --cache",
     "fix:format": "prettier . --write --cache",
     "fix": "yarn fix:format",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "clean": "npx rimraf next/.next next/.turbo strapi/dist",
+    "clean:full": "yarn clean && npx rimraf node_modules next/node_modules strapi/node_modules",
+    "fix:lock": "npx rimraf next/.next/dev/lock"
   },
   "dependencies": {
     "@types/node": "^22.5.2",
