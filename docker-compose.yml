@@ -25,7 +25,7 @@ services:
       - ./strapi/package.json:/opt/app/package.json
       - ./strapi/yarn.lock:/opt/app/yarn.lock
     ports:
-      - "1337:1337"
+      - '1337:1337'
     depends_on:
       launchpad-db:
         condition: service_healthy
@@ -41,11 +41,12 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - "5430:5432"
+      - '5430:5432'
     volumes:
       - strapi-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME} -d ${DATABASE_NAME}"]
+      test:
+        ['CMD-SHELL', 'pg_isready -U ${DATABASE_USERNAME} -d ${DATABASE_NAME}']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -60,7 +61,7 @@ services:
       NEXT_PUBLIC_API_URL: http://strapi:1337
       NODE_ENV: production
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - strapi
 
@@ -69,8 +70,8 @@ services:
     image: nginx:alpine
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - '80:80'
+      - '443:443'
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/ssl:/etc/nginx/ssl
@@ -83,7 +84,7 @@ services:
     image: adminer:latest
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - '8080:8080'
     environment:
       ADMINER_DEFAULT_SERVER: launchpad-db
     depends_on:
