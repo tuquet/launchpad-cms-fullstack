@@ -32,7 +32,7 @@ RUN --mount=type=cache,target=/root/.yarn \
 
 WORKDIR /opt/app
 COPY . .
-ENV PATH /opt/node_modules/.bin:$PATH
+ENV PATH=/opt/node_modules/.bin:$PATH
 RUN yarn build
 
 # --- STAGE 2: RUNTIME ---
@@ -47,7 +47,7 @@ WORKDIR /opt/app
 COPY --from=build /opt/app ./
 
 # Cấu hình Path để nhận diện lệnh strapi
-ENV PATH /opt/node_modules/.bin:$PATH
+ENV PATH=/opt/node_modules/.bin:$PATH
 
 # Tăng bộ nhớ cho Node.js khi build Admin
 ENV NODE_OPTIONS="--max-old-space-size=4096"
