@@ -67,6 +67,16 @@
       "problemMatcher": []
     },
     {
+      "label": "🔑 registry: login",
+      "type": "shell",
+      "command": "docker login ${input:registry}",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "🐳 registry: push-strapi",
       "type": "shell",
       "command": "docker build -t ${input:registry}/strapi-app:${input:tag} ./strapi && docker push ${input:registry}/strapi-app:${input:tag}",
