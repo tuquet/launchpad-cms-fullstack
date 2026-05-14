@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "🚀 Dev: Full Stack (1337, 3000)",
+      "label": "🚀 cms: dev",
       "type": "shell",
       "command": "yarn dev",
       "group": {
@@ -17,7 +17,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🛠️ Setup: Env & DB",
+      "label": "🐳 docker: db-up",
       "type": "shell",
       "command": "yarn setup",
       "presentation": {
@@ -27,7 +27,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🌱 Seed: Database",
+      "label": "🌱 strapi: seed",
       "type": "shell",
       "command": "yarn seed",
       "presentation": {
@@ -37,7 +37,7 @@
       "problemMatcher": []
     },
     {
-      "label": "📦 Dev: Backend (1337)",
+      "label": "📦 strapi: dev",
       "type": "shell",
       "command": "yarn strapi",
       "presentation": {
@@ -47,7 +47,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🌐 Dev: Frontend (3000)",
+      "label": "🌐 next: dev",
       "type": "shell",
       "command": "yarn next",
       "presentation": {
@@ -57,7 +57,7 @@
       "problemMatcher": []
     },
     {
-      "label": "🧹 Clean & Restart",
+      "label": "🧹 cms: clean",
       "type": "shell",
       "command": "npx kill-port 3000 1337 && yarn clean && npx rimraf next/.next/dev/lock && yarn dev",
       "presentation": {
@@ -65,6 +65,51 @@
         "panel": "dedicated"
       },
       "problemMatcher": []
+    },
+    {
+      "label": "🐳 registry: push-strapi",
+      "type": "shell",
+      "command": "docker build -t ${input:registry}/strapi-app:${input:tag} ./strapi && docker push ${input:registry}/strapi-app:${input:tag}",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "docker-build"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🐳 registry: push-next",
+      "type": "shell",
+      "command": "docker build -t ${input:registry}/next-app:${input:tag} ./next && docker push ${input:registry}/next-app:${input:tag}",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "docker-build"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🐳 registry: push-all",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "🐳 registry: push-strapi",
+        "🐳 registry: push-next"
+      ],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "registry",
+      "type": "promptString",
+      "description": "Registry Address (IP:5000 or Domain)",
+      "default": "localhost:5000"
+    },
+    {
+      "id": "tag",
+      "type": "promptString",
+      "description": "Image Tag (e.g. v1, latest, 2024-05-14)",
+      "default": "latest"
     }
   ]
 }
