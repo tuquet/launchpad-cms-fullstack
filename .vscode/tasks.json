@@ -106,6 +106,39 @@
         "🐳 registry: push-next"
       ],
       "problemMatcher": []
+    },
+    {
+      "label": "🚀 docker: prod-up",
+      "type": "shell",
+      "command": "docker compose -f docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml up -d",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "docker-prod"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🛑 docker: prod-down",
+      "type": "shell",
+      "command": "docker compose -f docker-compose.prod.yml down",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "docker-prod"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📜 docker: prod-logs",
+      "type": "shell",
+      "command": "docker compose -f docker-compose.prod.yml logs -f",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "docker-prod"
+      },
+      "problemMatcher": []
     }
   ],
   "inputs": [
