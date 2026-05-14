@@ -14,7 +14,11 @@
         "panel": "shared",
         "group": "main"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "rocket",
+        "color": "terminal.ansiYellow"
+      }
     },
     {
       "label": "🐳 docker: db-up",
@@ -24,7 +28,11 @@
         "reveal": "always",
         "panel": "dedicated"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "server-environment",
+        "color": "terminal.ansiBlue"
+      }
     },
     {
       "label": "🌱 strapi: seed",
@@ -34,7 +42,11 @@
         "reveal": "always",
         "panel": "dedicated"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "leaf",
+        "color": "terminal.ansiGreen"
+      }
     },
     {
       "label": "📦 strapi: dev",
@@ -44,7 +56,11 @@
         "reveal": "always",
         "panel": "dedicated"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "package",
+        "color": "terminal.ansiYellow"
+      }
     },
     {
       "label": "🌐 next: dev",
@@ -54,7 +70,11 @@
         "reveal": "always",
         "panel": "dedicated"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "globe",
+        "color": "terminal.ansiBlue"
+      }
     },
     {
       "label": "🧹 cms: clean",
@@ -64,7 +84,11 @@
         "reveal": "always",
         "panel": "dedicated"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "trash",
+        "color": "terminal.ansiRed"
+      }
     },
     {
       "label": "🔑 registry: login",
@@ -74,7 +98,11 @@
         "reveal": "always",
         "panel": "new"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "key",
+        "color": "terminal.ansiYellow"
+      }
     },
     {
       "label": "🐳 registry: push-strapi",
@@ -85,7 +113,11 @@
         "panel": "new",
         "group": "docker-build"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "server-environment",
+        "color": "terminal.ansiBlue"
+      }
     },
     {
       "label": "🐳 registry: push-next",
@@ -96,7 +128,11 @@
         "panel": "new",
         "group": "docker-build"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "server-environment",
+        "color": "terminal.ansiBlue"
+      }
     },
     {
       "label": "🐳 registry: push-all",
@@ -105,7 +141,11 @@
         "🐳 registry: push-strapi",
         "🐳 registry: push-next"
       ],
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "server-environment",
+        "color": "terminal.ansiBlue"
+      }
     },
     {
       "label": "🚀 docker: prod-up",
@@ -116,7 +156,11 @@
         "panel": "new",
         "group": "docker-prod"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "rocket",
+        "color": "terminal.ansiYellow"
+      }
     },
     {
       "label": "🛑 docker: prod-down",
@@ -127,7 +171,11 @@
         "panel": "new",
         "group": "docker-prod"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "stop",
+        "color": "terminal.ansiRed"
+      }
     },
     {
       "label": "📜 docker: prod-logs",
@@ -138,7 +186,11 @@
         "panel": "new",
         "group": "docker-prod"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "icon": {
+        "id": "file-text",
+        "color": "terminal.ansiCyan"
+      }
     }
   ],
   "inputs": [
