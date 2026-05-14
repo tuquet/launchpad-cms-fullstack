@@ -57,15 +57,16 @@ const nextConfig = {
         `${process.env.NEXT_PUBLIC_API_URL}/api/redirections`
       );
       const result = await res.json();
-      const redirectItems = result.data.map(({ source, destination }) => {
-        return {
-          source: `/:locale${source}`,
-          destination: `/:locale${destination}`,
-          permanent: false,
-        };
-      });
-
-      redirections = redirections.concat(redirectItems);
+      if (result?.data && Array.isArray(result.data)) {
+        const redirectItems = result.data.map(({ source, destination }) => {
+          return {
+            source: `/:locale${source}`,
+            destination: `/:locale${destination}`,
+            permanent: false,
+          };
+        });
+        redirections = redirections.concat(redirectItems);
+      }
 
       return redirections;
     } catch (error) {
