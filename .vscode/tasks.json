@@ -3,16 +3,11 @@
   "tasks": [
     {
       "label": "🚀 cms: dev",
-      "type": "shell",
-      "command": "yarn dev",
+      "dependsOn": ["📦 strapi: dev", "🌐 next: dev"],
+      "dependsOrder": "parallel",
       "group": {
         "kind": "build",
         "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "group": "main"
       },
       "problemMatcher": [],
       "icon": {

@@ -26,7 +26,7 @@ yarn setup
 
 ### Bước 2: Kiểm tra Database
 
-Sau khi chạy setup, Database sẽ chạy tại cổng `5430`. Bạn có thể truy cập giao diện quản lý DB tại:
+Sau khi chạy setup, Database sẽ chạy tại cổng `5432`. Bạn có thể truy cập giao diện quản lý DB tại:
 
 - **Adminer**: [http://localhost:8080](http://localhost:8080)
 
@@ -60,7 +60,7 @@ Khi chạy local, dự án sử dụng các cổng sau:
 - **Next.js Frontend**: [http://localhost:3000](http://localhost:3000)
 - **Strapi Backend**: [http://localhost:1337](http://localhost:1337)
 - **Strapi Admin**: [http://localhost:1337/admin](http://localhost:1337/admin)
-- **Postgres (External)**: `localhost:5430`
+- **Postgres (External)**: `localhost:5432`
 
 ---
 
@@ -102,7 +102,7 @@ docker compose up -d --build
 | :----------- | :---------- | :--------------------------------------------- |
 | **Frontend** | `3000`      | [http://localhost:3000](http://localhost:3000) |
 | **Backend**  | `1337`      | [http://localhost:1337](http://localhost:1337) |
-| **Database** | `5430`      | `localhost:5430` (Map từ container 5432)       |
+| **Database** | `5432`      | `localhost:5432` (Map từ container 5432)       |
 | **Nginx**    | `80`        | [http://localhost](http://localhost)           |
 | **Adminer**  | `8080`      | [http://localhost:8080](http://localhost:8080) |
 
