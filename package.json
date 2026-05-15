@@ -11,6 +11,8 @@
     "setup:deps": "cd next && yarn install && cd ../strapi && yarn install",
     "setup:db": "docker compose up -d launchpad-db",
     "setup:seed": "cd strapi && yarn strapi import -f ./data/export_20250116105447.tar.gz --force",
+    "seed:disable": "npx -y tsx scripts/toggle-seed.mts disable",
+    "seed:enable": "npx -y tsx scripts/toggle-seed.mts enable",
     "setup": "yarn setup:env && yarn setup:deps && yarn setup:db && echo '\n--- Setup Completed! ---'",
     "dev": "concurrently -n \"strapi,next\" -c \"green,blue\" \"yarn strapi\" \"wait-on http://127.0.0.1:1337 && yarn next\"",
     "export": "cd strapi && yarn strapi export --no-encrypt -f ./data/export_20250116105447",
