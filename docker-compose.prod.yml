@@ -59,7 +59,7 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - "5432:5432"
+      - "54321:5432"
     volumes:
       - strapi-data:/var/lib/postgresql/data
     healthcheck:
