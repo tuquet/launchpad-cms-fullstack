@@ -24,11 +24,8 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      # ==========================================
-      # 🚀 Un-comment dòng dưới đây để bật Seed dữ liệu
-      # ==========================================
-      # SEED_DATA: "true"
-      
+      # Bật SEED_DATA=true trong file .env để tự động nạp dữ liệu DB và ảnh ban đầu
+      SEED_DATA: ${SEED_DATA:-false}
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_HOST: launchpad-db
       DATABASE_PORT: ${DATABASE_PORT}

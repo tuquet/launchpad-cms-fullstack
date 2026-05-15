@@ -186,7 +186,52 @@
       }
     },
     {
-      "label": "🚀 docker: prod-up",
+      "label": "🚀 docker compose: local-up",
+      "type": "shell",
+      "command": "docker compose up -d",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "docker-local"
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "rocket",
+        "color": "terminal.ansiYellow"
+      }
+    },
+    {
+      "label": "🛑 docker compose: local-down",
+      "type": "shell",
+      "command": "docker compose down",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "docker-local"
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "stop",
+        "color": "terminal.ansiRed"
+      }
+    },
+    {
+      "label": "📜 docker compose: local-logs",
+      "type": "shell",
+      "command": "docker compose logs -f",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "docker-local"
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "file-text",
+        "color": "terminal.ansiCyan"
+      }
+    },
+    {
+      "label": "🚀 docker compose: prod-up",
       "type": "shell",
       "command": "docker compose -f docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml up -d",
       "presentation": {
@@ -201,7 +246,7 @@
       }
     },
     {
-      "label": "🛑 docker: prod-down",
+      "label": "🛑 docker compose: prod-down",
       "type": "shell",
       "command": "docker compose -f docker-compose.prod.yml down",
       "presentation": {
@@ -216,7 +261,7 @@
       }
     },
     {
-      "label": "📜 docker: prod-logs",
+      "label": "📜 docker compose: prod-logs",
       "type": "shell",
       "command": "docker compose -f docker-compose.prod.yml logs -f",
       "presentation": {
