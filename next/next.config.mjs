@@ -50,18 +50,17 @@ const nextConfig = {
   //   ];
   // },
   async redirects() {
-    if (process.env.NEXT_PUBLIC_API_URL === undefined) {
+    const apiUrl = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL;
+    if (!apiUrl) {
       console.warn(
-        '[next.config] NEXT_PUBLIC_API_URL is not defined. Skipping redirect generation.'
+        '[next.config] API URL is not defined. Skipping redirect generation.'
       );
       return [];
     }
 
     let redirections = [];
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/redirections`
-      );
+      const res = await fetch(`${apiUrl}/api/redirections`);
       const result = await res.json();
       if (result?.data && Array.isArray(result.data)) {
         const redirectItems = result.data.map(({ source, destination }) => {
