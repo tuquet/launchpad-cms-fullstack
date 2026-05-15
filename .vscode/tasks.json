@@ -100,6 +100,49 @@
       }
     },
     {
+      "label": "🐳 docker: build-strapi",
+      "type": "shell",
+      "command": "docker build -t ${input:registry}/strapi-app:${input:tag} ./strapi",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "docker-build"
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "server-environment",
+        "color": "terminal.ansiBlue"
+      }
+    },
+    {
+      "label": "🐳 docker: build-next",
+      "type": "shell",
+      "command": "docker build -t ${input:registry}/next-app:${input:tag} ./next",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "docker-build"
+      },
+      "problemMatcher": [],
+      "icon": {
+        "id": "server-environment",
+        "color": "terminal.ansiBlue"
+      }
+    },
+    {
+      "label": "🐳 docker: build-all",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "🐳 docker: build-strapi",
+        "🐳 docker: build-next"
+      ],
+      "problemMatcher": [],
+      "icon": {
+        "id": "server-environment",
+        "color": "terminal.ansiBlue"
+      }
+    },
+    {
       "label": "🐳 registry: push-strapi",
       "type": "shell",
       "command": "docker build -t ${input:registry}/strapi-app:${input:tag} ./strapi && docker push ${input:registry}/strapi-app:${input:tag}",
