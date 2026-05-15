@@ -57,3 +57,26 @@ Thêm thuộc tính cấu hình `dangerouslyAllowLocalIP: true` vào khối `ima
   }
 ```
 *Ghi Chú Đính Kèm: Mọi thay đổi về file `next.config.mjs` luôn mong muốn phải Rebuild lại Docker Image (vd: `docker compose build nextjs`) chứ không ăn ngay lập tức.*
+
+---
+
+## 4. Lỗi Rewrite Ảnh Khi Chạy Docker Compose Up
+**🚫 Vấn đề:**
+Khi chạy `docker compose up -d`, mặc dù server Strapi và NextJS đều lên, nhưng ảnh đôi khi vẫn báo 400 hoặc không tìm thấy do NextJS cố gắng fetch ảnh từ `NEXT_PUBLIC_API_URL` (thường trỏ về `localhost` trên trình duyệt) thay vì dùng mạng nội bộ Docker.
+
+**✅ Giải pháp đã triển khai:**
+Phân tách giữa URL Public (Client-side) và URL Internal (Server-side):
+1. **Cập nhật `docker-compose.yml`**: Thêm biến `STRAPI_INTERNAL_URL: http://strapi:1337` để NextJS dùng khi Fetch/Rewrites phía Server.
+2. **Cập nhật `next.config.mjs`**: Sửa logic `rewrites` để ưu tiên dùng `STRAPI_INTERNAL_URL`.
+```javascript
+  async rewrites() {
+    const strapiUrl = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL || 'http://strapi:1337';
+    return [
+      {
+        source: '/uploads/:path*',
+        destination: `${strapiUrl}/uploads/:path*`,
+      },
+    ];
+  }
+```
+Việc này đảm bảo khi trình duyệt gọi `/uploads/abc.jpg`, Next.js Server sẽ đứng ra "bắt tay" nội bộ với container `strapi:1337` để lấy dữ liệu thay vì bắt trình duyệt phải tự tìm đường tới IP container.

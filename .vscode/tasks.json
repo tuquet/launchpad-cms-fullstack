@@ -144,8 +144,9 @@
     },
     {
       "label": "🐳 registry: push-strapi",
+      "dependsOn": ["🐳 docker: build-strapi"],
       "type": "shell",
-      "command": "docker build -t ${input:registry}/strapi-app:${input:tag} ./strapi && docker push ${input:registry}/strapi-app:${input:tag}",
+      "command": "docker push ${input:registry}/strapi-app:${input:tag}",
       "presentation": {
         "reveal": "always",
         "panel": "new",
@@ -159,8 +160,9 @@
     },
     {
       "label": "🐳 registry: push-next",
+      "dependsOn": ["🐳 docker: build-next"],
       "type": "shell",
-      "command": "docker build -t ${input:registry}/next-app:${input:tag} ./next && docker push ${input:registry}/next-app:${input:tag}",
+      "command": "docker push ${input:registry}/next-app:${input:tag}",
       "presentation": {
         "reveal": "always",
         "panel": "new",
@@ -183,6 +185,16 @@
       "icon": {
         "id": "server-environment",
         "color": "terminal.ansiBlue"
+      }
+    },
+    {
+      "label": "🚀 registry: deploy-all",
+      "dependsOrder": "sequence",
+      "dependsOn": ["🐳 docker: build-all", "🐳 registry: push-all"],
+      "problemMatcher": [],
+      "icon": {
+        "id": "cloud-upload",
+        "color": "terminal.ansiGreen"
       }
     },
     {

@@ -37,7 +37,8 @@ const nextConfig = {
   },
   pageExtensions: ['ts', 'tsx'],
   async rewrites() {
-    const strapiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://strapi:1337';
+    // Sử dụng URL nội bộ khi chạy trong Docker, mặc định là http://strapi:1337
+    const strapiUrl = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL || 'http://strapi:1337';
     return [
       {
         source: '/uploads/:path*',

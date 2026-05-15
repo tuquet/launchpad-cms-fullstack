@@ -59,7 +59,8 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
-      NEXT_PUBLIC_API_URL: http://strapi:1337
+      NEXT_PUBLIC_API_URL: http://localhost:1337
+      STRAPI_INTERNAL_URL: http://strapi:1337
       NODE_ENV: production
     ports:
       - '3000:3000'
