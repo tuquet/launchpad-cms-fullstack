@@ -55,7 +55,19 @@ ENV NODE_OPTIONS="--max-old-space-size=4096"
 # Phân quyền cho user node để đảm bảo bảo mật (Security-First)
 RUN mkdir -p /opt/app/public/uploads /opt/app/src/extensions/documentation/documentation && \
     chown -R node:node /opt/app
+
+# === THÊM MỚI TỪ ĐÂY ===
+# Copy file khởi tạo vào container, cấp quyền thực thi
+COPY --chown=node:node scripts/docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+# =======================
+
 USER node
 
 EXPOSE 1337
+
+# Set script Init làm Entrypoint, nó sẽ luôn chạy đầu tiên
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+# Tham số truyền vào cho Entrypoint khi kết thúc
 CMD ["yarn", "start"]

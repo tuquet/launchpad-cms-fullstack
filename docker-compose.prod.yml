@@ -24,6 +24,11 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
+      # ==========================================
+      # 🚀 Un-comment dòng dưới đây để bật Seed dữ liệu
+      # ==========================================
+      # SEED_DATA: "true"
+      
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_HOST: launchpad-db
       DATABASE_PORT: ${DATABASE_PORT}
@@ -36,6 +41,8 @@ services:
       NODE_ENV: production
     ports:
       - "1337:1337"
+    volumes:
+      - strapi-uploads:/opt/app/public/uploads
     depends_on:
       launchpad-db:
         condition: service_healthy
@@ -99,3 +106,4 @@ services:
 
 volumes:
   strapi-data:
+  strapi-uploads:
