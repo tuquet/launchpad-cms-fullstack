@@ -76,6 +76,16 @@ docker compose -f docker-compose.prod.yml pull
 docker compose -f docker-compose.prod.yml up -d
 ```
 
+### 5. Tắt chế độ Seed Data (Quan trọng)
+Nếu biến `SEED_DATA=true` đang bật, Strapi sẽ reset lại toàn bộ Database mỗi khi khởi động lại. Sau lần chạy đầu tiên thành công, bạn **BẮT BUỘC** phải tắt nó đi. 
+
+Vì VPS không cài Node.js, hãy sử dụng Bash Script cực nhẹ đã chuẩn bị sẵn:
+```bash
+chmod +x scripts/toggle-seed.sh
+./scripts/toggle-seed.sh disable
+```
+(Chạy lệnh trên xong, bạn sẽ thấy `SEED_DATA=false` trong file `.env`)
+
 ---
 
 ## 🔄 Quy trình Cập nhật (Update / Rollback Workflow)
