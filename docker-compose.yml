@@ -27,6 +27,12 @@ services:
       - ./strapi/yarn.lock:/opt/app/yarn.lock
     ports:
       - '1337:1337'
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -qO- http://127.0.0.1:1337/admin > /dev/null || exit 1']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     depends_on:
       launchpad-db:
         condition: service_healthy
@@ -67,7 +73,8 @@ services:
     ports:
       - '3000:3000'
     depends_on:
-      - strapi
+      strapi:
+        condition: service_healthy
 
   nginx:
     container_name: nginx

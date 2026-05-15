@@ -36,19 +36,21 @@ const nextConfig = {
     ],
   },
   pageExtensions: ['ts', 'tsx'],
-  // async rewrites() {
-  //   // Sử dụng URL nội bộ khi chạy trong Docker, mặc định là http://strapi:1337
-  //   const strapiUrl =
-  //     process.env.STRAPI_INTERNAL_URL ||
-  //     process.env.NEXT_PUBLIC_API_URL ||
-  //     'http://strapi:1337';
-  //   return [
-  //     {
-  //       source: '/uploads/:path*',
-  //       destination: `${strapiUrl}/uploads/:path*`,
-  //     },
-  //   ];
-  // },
+  async rewrites() {
+    // Sử dụng URL nội bộ khi chạy trong Docker, mặc định là http://strapi:1337
+    const strapiUrl =
+      process.env.STRAPI_INTERNAL_URL ||
+      process.env.NEXT_PUBLIC_API_URL ||
+      'http://strapi:1337';
+    return {
+      beforeFiles: [
+        {
+          source: '/uploads/:path*',
+          destination: `${strapiUrl}/uploads/:path*`,
+        },
+      ],
+    };
+  },
   async redirects() {
     const apiUrl = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL;
     if (!apiUrl) {

@@ -11,8 +11,13 @@ function getLocale(request: NextRequest): string | undefined {
 
   const locales: Readonly<string[]> = i18n.locales;
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+  const validLanguages = languages.filter((lang) => lang !== '*');
 
-  const locale = matchLocale(languages, locales, i18n.defaultLocale);
+  const locale = matchLocale(
+    validLanguages.length > 0 ? validLanguages : [i18n.defaultLocale],
+    locales,
+    i18n.defaultLocale
+  );
   return locale;
 }
 
@@ -36,5 +41,5 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|uploads|favicon.ico).*)'],
 };
