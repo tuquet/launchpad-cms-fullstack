@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  output: process.env.NEXT_OUTPUT || undefined,
   // Enable Next.js 16 cache components
   cacheComponents: true,
   turbopack: {
@@ -36,16 +36,19 @@ const nextConfig = {
     ],
   },
   pageExtensions: ['ts', 'tsx'],
-  async rewrites() {
-    // Sử dụng URL nội bộ khi chạy trong Docker, mặc định là http://strapi:1337
-    const strapiUrl = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL || 'http://strapi:1337';
-    return [
-      {
-        source: '/uploads/:path*',
-        destination: `${strapiUrl}/uploads/:path*`,
-      },
-    ];
-  },
+  // async rewrites() {
+  //   // Sử dụng URL nội bộ khi chạy trong Docker, mặc định là http://strapi:1337
+  //   const strapiUrl =
+  //     process.env.STRAPI_INTERNAL_URL ||
+  //     process.env.NEXT_PUBLIC_API_URL ||
+  //     'http://strapi:1337';
+  //   return [
+  //     {
+  //       source: '/uploads/:path*',
+  //       destination: `${strapiUrl}/uploads/:path*`,
+  //     },
+  //   ];
+  // },
   async redirects() {
     if (process.env.NEXT_PUBLIC_API_URL === undefined) {
       console.warn(
@@ -68,6 +71,7 @@ const nextConfig = {
             permanent: false,
           };
         });
+
         redirections = redirections.concat(redirectItems);
       }
 

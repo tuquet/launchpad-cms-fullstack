@@ -57,6 +57,8 @@ services:
     build:
       context: ./next
       dockerfile: Dockerfile
+      args:
+        - NEXT_OUTPUT=${NEXT_OUTPUT:-standalone}
     restart: unless-stopped
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:1337
