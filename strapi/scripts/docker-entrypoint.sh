@@ -10,8 +10,8 @@ if [ "$SEED_DATA" = "true" ]; then
 
   if [ -n "$SEED_FILE" ]; then
     echo "📦 Found seed file: $SEED_FILE. Importing data and images..."
-    # Import dữ liệu kèm --force để ghi đè. Lệnh được chạy trong pipeline boot hệ thống.
-    yarn strapi import -f "$SEED_FILE" --force || echo "⚠️ Cảnh báo: Gặp lỗi khi import (có thể do sai quyền thư mục uploads hoặc đã import trước đó)"
+    # Dùng lệnh echo "y" để truyền thẳng câu trả lời 'Yes' vào prompt xóa dữ liệu nhằm tự động hóa hoàn toàn
+    echo "y" | yarn strapi import -f "$SEED_FILE" --force || echo "⚠️ Cảnh báo: Gặp lỗi khi import (có thể do sai quyền thư mục uploads hoặc đã import trước đó)"
   else
     echo "⚠️ Bật SEED_DATA=true nhưng KHÔNG tìm thấy file .tar.gz nào ở data/"
   fi

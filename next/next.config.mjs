@@ -7,6 +7,8 @@ const nextConfig = {
     root: process.cwd().replace('/next', ''),
   },
   images: {
+    // Cho phép load ảnh từ các mạng Docker ảo (Private IP) để tránh lỗi SSRF block trong Next.js 14+
+    dangerouslyAllowLocalIP: true,
     // Disable image optimization for localhost in development
     ...(process.env.NODE_ENV === 'development' ? { unoptimized: true } : {}),
     remotePatterns: [
