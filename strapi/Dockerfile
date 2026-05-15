@@ -57,17 +57,18 @@ RUN mkdir -p /opt/app/public/uploads /opt/app/src/extensions/documentation/docum
     chown -R node:node /opt/app
 
 # === THÊM MỚI TỪ ĐÂY ===
-# Copy file khởi tạo vào container, cấp quyền thực thi
+# Copy file khởi tạo vào container, cấp quyền thực thi và Fix lỗi CRLF (Windows)
 COPY --chown=node:node scripts/docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh && \
+    sed -i 's/\r$//' /usr/local/bin/docker-entrypoint.sh
 # =======================
 
 USER node
 
 EXPOSE 1337
 
-# Set script Init làm Entrypoint, nó sẽ luôn chạy đầu tiên
-ENTRYPOINT ["docker-entrypoint.sh"]
+# Set script Init làm Entrypoint, gọi thông qua /bin/sh để tuyệt đối an toàn
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/docker-entrypoint.sh"]
 
 # Tham số truyền vào cho Entrypoint khi kết thúc
 CMD ["yarn", "start"]
