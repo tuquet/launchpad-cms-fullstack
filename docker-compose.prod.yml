@@ -28,7 +28,8 @@ services:
       SEED_DATA: ${SEED_DATA:-false}
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_HOST: launchpad-db
-      DATABASE_PORT: ${DATABASE_PORT}
+      # Override cổng kết nối nội bộ Docker (luôn là 5432) để tránh lấy nhầm port Host ở file .env
+      DATABASE_PORT: 5432
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
