@@ -83,6 +83,9 @@ docker compose -f docker-compose.prod.yml pull
 docker compose -f docker-compose.prod.yml up -d
 ```
 
+> **🌐 Cấu hình Domain & Nginx:** Sau khi hệ thống chạy lên thành công, container Nginx của CMS sẽ lắng nghe ở cổng `8000`. Bạn cần thiết lập Nginx UI trỏ domain về cổng này. 
+> 📄 **Xem hướng dẫn chi tiết tại:** [docs/vps-nginx-proxy.md](./vps-nginx-proxy.md)
+
 ### 5. Tắt chế độ Seed Data (Quan trọng)
 Nếu biến `SEED_DATA=true` đang bật, Strapi sẽ reset lại toàn bộ Database mỗi khi khởi động lại. Sau lần chạy đầu tiên thành công, bạn **BẮT BUỘC** phải tắt nó đi. 
 
