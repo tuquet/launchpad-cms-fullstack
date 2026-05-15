@@ -188,16 +188,6 @@
       }
     },
     {
-      "label": "🚀 registry: deploy-all",
-      "dependsOrder": "sequence",
-      "dependsOn": ["🐳 docker: build-all", "🐳 registry: push-all"],
-      "problemMatcher": [],
-      "icon": {
-        "id": "cloud-upload",
-        "color": "terminal.ansiGreen"
-      }
-    },
-    {
       "label": "🚀 docker compose: local-up",
       "type": "shell",
       "command": "docker compose up -d",
