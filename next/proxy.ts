@@ -13,11 +13,19 @@ function getLocale(request: NextRequest): string | undefined {
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
   const validLanguages = languages.filter((lang) => lang !== '*');
 
-  const locale = matchLocale(
-    validLanguages.length > 0 ? validLanguages : [i18n.defaultLocale],
-    locales,
-    i18n.defaultLocale
-  );
+  let locale;
+  try {
+    locale = matchLocale(
+      validLanguages.length > 0 ? validLanguages : [i18n.defaultLocale],
+      locales,
+      i18n.defaultLocale
+    );
+  } catch (error) {
+    // Nếu header Accept-Language bị lỗi định dạng (do bot, spam), matchLocale sẽ throw RangeError.
+    // Bắt lỗi này và trả về ngôn ngữ mặc định thay vì sập server.
+    locale = i18n.defaultLocale;
+  }
+  
   return locale;
 }
 
