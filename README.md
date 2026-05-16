@@ -19,26 +19,34 @@ Hệ thống được thiết kế theo chuẩn **B2B SaaS Enterprise**, đóng 
 
 ## 🎯 Trải nghiệm Nhanh (Dành cho Khách hàng)
 
-Để khởi chạy toàn bộ nền tảng trên máy tính cá nhân hoặc VPS của bạn, chỉ cần thực hiện 3 bước đơn giản:
+Để khởi chạy toàn bộ nền tảng trên máy tính cá nhân của bạn, bạn có thể chọn 1 trong 2 cách sau:
 
-### Bước 1: Khởi động hệ thống
-Dự án đã tích hợp sẵn Script cấu hình tự động. Bạn mở Terminal và gõ:
+### Cách 1: Cài đặt tự động "1 Chạm" (Khuyên dùng)
+Dự án đã tích hợp sẵn Script tự động kiểm tra cấu hình, Build hệ thống và nạp dữ liệu mẫu. Bạn chỉ cần gõ:
 
 ```bash
-# 1. Sinh file cấu hình và mật khẩu ngẫu nhiên cho môi trường trải nghiệm
-bash scripts/copy-env.sh --env dev
+bash scripts/install.sh
+```
 
-# 2. Khởi động hệ thống (Docker sẽ tự Build các phần mềm từ mã nguồn)
+### Cách 2: Cài đặt từng bước (Dành cho Developer)
+Dành cho những ai muốn tự tay khởi chạy và kiểm soát từng tiến trình.
+
+**1. Sinh cấu hình và mật khẩu ngẫu nhiên:**
+```bash
+bash scripts/copy-env.sh --env dev
+```
+
+**2. Khởi động hệ thống (Build từ mã nguồn):**
+```bash
 docker compose up -d --build
 ```
 
-### Bước 2: Nạp dữ liệu mẫu (Demo Data)
-Để có ngay giao diện hoàn chỉnh với các bài viết và hình ảnh mẫu, hãy chạy lệnh:
+**3. Nạp dữ liệu mẫu (Demo Data):**
 ```bash
 docker compose exec strapi sh -c 'echo "y" | yarn strapi import -f ./data/export_20250116105447.tar.gz --force'
 ```
 
-### Bước 3: Truy cập và Trải nghiệm
+### Cuối cùng: Truy cập và Trải nghiệm
 Mở trình duyệt và truy cập vào các đường dẫn sau *(thay `localhost` bằng IP VPS nếu chạy trên máy chủ)*:
 
 - 🌐 **Giao diện Người dùng (Frontend):** [http://localhost:3000](http://localhost:3000)
