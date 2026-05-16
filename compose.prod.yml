@@ -39,7 +39,7 @@ services:
     ports:
       - "1337:1337"
     volumes:
-      - strapi-uploads:/opt/app/public/uploads
+      - strapi-uploads:/opt/app/public
     depends_on:
       launchpad-db:
         condition: service_healthy
