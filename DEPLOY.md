@@ -45,11 +45,11 @@ chmod +x scripts/copy-env.sh
 ```
 *(Script tự động set `COMPOSE_FILE=compose.prod.yml` để bạn không cần gõ flag `-f` khi chạy lệnh Docker Compose)*
 
-Mở file `.env` và cập nhật thông số Registry:
+Mở file `.env` và kiểm tra thông số Registry:
 ```env
-# Địa chỉ của Private Registry
+# Mặc định là localhost:5000 nếu Registry cài trên cùng VPS. 
+# Nếu bạn dùng Registry ở máy chủ khác, hãy thay bằng IP/Domain của Registry đó.
 REGISTRY_URL=localhost:5000 
-# Tag phiên bản (trùng với tag lúc build)
 IMAGE_TAG=latest 
 ```
 
@@ -88,7 +88,9 @@ Chỉ cần mở file `.env` trên VPS, đổi `IMAGE_TAG` về phiên bản cũ
 
 ---
 
-## ⚙️ Cấu hình Nginx Proxy (Nginx UI)
+## ⚙️ Cấu hình Nginx Proxy (Dành cho LaunchPad Registry Stack)
+
+*(Lưu ý: Bỏ qua phần này nếu bạn không cài đặt Nginx UI từ hệ sinh thái LaunchPad Registry Stack).*
 
 Thay vì chiếm dụng cổng `80` và `443`, container Nginx của CMS sẽ đẩy website ra cổng `8000` để nhường quyền quản lý SSL cho **Nginx UI**.
 
@@ -107,17 +109,13 @@ Thay vì chiếm dụng cổng `80` và `443`, container Nginx của CMS sẽ đ
 
 ## 🛠️ Xử lý sự cố thường gặp (Troubleshooting)
 
-### 1. Tràn dung lượng ổ cứng (No space left on device)
-Trong quá trình Push/Pull nhiều lần, Docker sẽ sinh ra rất nhiều "rác" (Dangling Images, Build Cache).
-**Giải pháp:** Chạy script dọn dẹp hệ thống:
+> [!WARNING]  
+> Cảnh báo: Các lệnh dọn dẹp dưới đây là biện pháp mạnh để giải phóng ổ cứng. Chỉ thực hiện khi VPS báo lỗi Full Disk (Không pull/build được ảnh).
+
+### Tràn dung lượng ổ cứng (No space left on device)
+Trong quá trình Push/Pull cập nhật nhiều lần, Docker sẽ giữ lại các phiên bản cũ gây ra "rác" (Dangling Images, Build Cache) chiếm hàng chục GB ổ cứng. 
+
+**Giải pháp:** Chạy script dọn dẹp (Lệnh này an toàn với các Container đang chạy, nó chỉ dọn rác và các container đã dừng):
 ```bash
 sh scripts/cleanup.sh
 ```
-
-### 2. Strapi chớp tắt do cấu hình Port (ECONNREFUSED)
-**Lý do:** Giao tiếp giữa Strapi và Database trong nội mạng Docker bắt buộc phải qua cổng `5432`.
-**Giải pháp:** Đã được xử lý cứng trong `compose.yml`. Strapi sẽ tự động kết nối qua tên định danh `launchpad-db` thay vì dùng thông số của môi trường Local.
-
-### 3. Next.js không hiển thị ảnh (Lỗi SSRF 400 Bad Request)
-**Lý do:** Next.js (bản 14+) có cơ chế chống SSRF, mặc định chặn việc tải ảnh từ dải IP Private hoặc Localhost.
-**Giải pháp:** Dự án đã được nhúng sẵn thuộc tính `dangerouslyAllowLocalIP: true` vào khối `images` trong file `next.config.mjs` để cho phép Next.js lấy ảnh an toàn từ container Strapi nội bộ. Lỗi này sẽ không xuất hiện nếu bạn Pull image mới nhất.
