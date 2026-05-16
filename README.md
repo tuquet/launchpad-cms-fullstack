@@ -1,208 +1,88 @@
-# 🚀 LaunchPad - Official Strapi Demo (Refactored)
+# 🚀 LaunchPad - Enterprise CMS Fullstack
 
 ![LaunchPad](./LaunchPad.jpg)
 
-Welcome to **LaunchPad**, the official Strapi demo application. This project is a full-stack starter kit combining **Strapi 5** (CMS) and **Next.js** (Frontend) with a pre-configured **PostgreSQL** database.
+**LaunchPad** là giải pháp Headless CMS toàn diện, kết hợp sức mạnh quản trị nội dung của **Strapi 5 (Backend)** và hiệu năng hiển thị vượt trội của **Next.js 16 (Frontend)**. 
+
+Hệ thống được thiết kế theo chuẩn **B2B SaaS Enterprise**, đóng gói hoàn chỉnh bằng Docker với tiêu chí: *Nhanh chóng, Bảo mật, Dễ dàng mở rộng và Sẵn sàng cho Production.*
 
 ---
 
-### 🛡️ Optimized for Production
+## ✨ Điểm nổi bật của Nền tảng
 
-Do not build your images directly on a low-RAM VPS! We highly recommend using the [Private Docker Registry Boilerplate](https://github.com/tuquet/docker-registry-boilerplate) to store your pre-built images. This ensures a **lightweight, fast, and secure** deployment cycle.
-
-👉 **[Xem hướng dẫn triển khai VPS bằng tiếng Việt tại đây](./docs/deployment-vps.md)** 🇻🇳
-
----
-
-## 🛠️ Environment Matrix
-
-| Service              | Local Dev (Non-Docker)                         | Docker (Production-ready)                      |
-| :------------------- | :--------------------------------------------- | :--------------------------------------------- |
-| **Strapi Backend**   | [http://localhost:1337](http://localhost:1337) | [http://localhost:1337](http://localhost:1337) |
-| **Next.js Frontend** | [http://localhost:3000](http://localhost:3000) | [http://localhost:3000](http://localhost:3000) |
-| **PostgreSQL**       | `localhost:54321`                               | `localhost:5432` (Internal)                    |
-| **Adminer (DB UI)**  | [http://localhost:8080](http://localhost:8080) | [http://localhost:8080](http://localhost:8080) |
-| **Swagger Docs**     | [/documentation/v1.0.0](/documentation/v1.0.0) | [/documentation/v1.0.0](/documentation/v1.0.0) |
+- 🏗️ **Kiến trúc Headless:** Tách biệt hoàn toàn Frontend và Backend, giúp dễ dàng tích hợp thêm Mobile App hoặc hệ thống thứ 3.
+- ⚡ **Tối ưu SEO & Hiệu năng:** Sử dụng Next.js App Router, SSR (Server-Side Rendering) và cơ chế Caching thông minh (On-demand Revalidation).
+- 🛡️ **Bảo mật tối đa:** Các dịch vụ cốt lõi (Database, CMS) ẩn hoàn toàn trong mạng nội bộ Docker (Private Network), chặn đứng nguy cơ tấn công trực tiếp.
+- 🚀 **Zero-Build Deployment:** Triển khai lên VPS Production không tốn tài nguyên Build, đảm bảo Server cấu hình thấp (1-2GB RAM) vẫn chạy mượt mà.
 
 ---
 
-## 🏗️ 1. Local Development (Hybrid Mode)
+## 🎯 Trải nghiệm Nhanh (Dành cho Khách hàng)
 
-_Best for speed, hot-reloading, and avoiding Windows/Docker permission issues._
+Để khởi chạy toàn bộ nền tảng trên máy tính cá nhân hoặc VPS của bạn, chỉ cần thực hiện 3 bước đơn giản:
 
-### Step 1: Start the Database
-
-Ensure only the Database and DB UI are running in Docker:
-
-```powershell
-docker compose up -d launchpad-db launchpad-adminer
-```
-
-### Step 2: Setup Environments
-
-Install dependencies and sync `.env` files across root, `strapi/`, and `next/`:
-
-```powershell
-yarn setup
-```
-
-> **Tip:** The `yarn setup` script automatically generates unique secrets for `tobemodified` keys in your `.env` files.
-
-### Step 3: Run the Engines
-
-Start both Strapi and Next.js concurrently:
-
-```powershell
-yarn dev
-```
-
-- **Strapi** will be available at `1337`.
-- **Next.js** will be available at `3000`.
-
----
-
-## 🐳 2. Docker Full-Stack Deployment
-
-_Best for production simulation or consistent environments._
-
-### Spin up everything
-
-```powershell
-docker compose up -d --build
-```
-
-### 🔄 Updating Changes to Docker
-
-If you modify Code or Environment Variables, follow this workflow to ensure Docker is synced:
-
-1. **Down**: `docker compose down`
-2. **Build**: `docker compose build nextjs strapi` (Bypass cache to bake in new Env vars with --no-cache args)
-3. **Up**: `docker compose up -d`
-
-### 🧪 Troubleshooting "Failed to fetch module"
-
-If the Strapi Admin UI shows blank/broken pages, it's likely a hydration issue. Run a clean rebuild:
-
-```powershell
-docker compose down -v
-docker compose build --no-cache
-docker compose up -d
-```
-
----
-
-## 🚀 3. VPS Production Deployment
-
-_Deploy lên VPS không cần build, chỉ pull images từ Private Registry._
-
-### Setup lần đầu
-
-Script tự động tạo `.env`, generate secrets, và set `COMPOSE_FILE=compose.prod.yml`:
+### Bước 1: Khởi động hệ thống
+Dự án đã tích hợp sẵn Script cấu hình tự động. Bạn mở Terminal và gõ:
 
 ```bash
-# Linux/VPS
+# 1. Sinh file cấu hình và mật khẩu ngẫu nhiên
 bash scripts/copy-env.sh --env prod
 
-# Windows (PowerShell)
-powershell -ExecutionPolicy Bypass -File .\scripts\copy-env.ps1 -Env prod
-```
-
-Sau đó chỉ cần:
-
-```bash
-docker login <REGISTRY_IP>:5000
-docker compose up -d          # ← Không cần -f compose.prod.yml nữa!
-```
-
-### Chuyển đổi môi trường
-
-| Lệnh | Kết quả |
-| :--- | :--- |
-| `bash scripts/copy-env.sh --env dev --force` | Chuyển về dev (`compose.yml`) |
-| `bash scripts/copy-env.sh --env prod --force` | Chuyển sang prod (`compose.prod.yml`) |
-
-> **How it works:** Script inject `COMPOSE_FILE=<value>` vào `.env`. Docker Compose tự động đọc biến này nên không cần flag `-f` nữa.
-
-### Cập nhật version mới
-
-```bash
-# Sửa IMAGE_TAG trong .env (vd: latest -> v2), rồi:
-docker compose pull
+# 2. Khởi động hệ thống (Docker sẽ tự tải các phần mềm cần thiết)
 docker compose up -d
 ```
 
----
-
-## 💾 4. Data Management
-
-### Seeding (Import Demo Data)
-
-To populate your instance with the provided demo content:
-
-#### Local Dev
-```powershell
-yarn setup:seed
-```
-
-#### Production / Docker (VPS)
-Run the following command to securely seed data inside the running container (Cách 1 - An toàn nhất):
+### Bước 2: Nạp dữ liệu mẫu (Demo Data)
+Để có ngay giao diện hoàn chỉnh với các bài viết và hình ảnh mẫu, hãy chạy lệnh:
 ```bash
 docker compose exec strapi sh -c 'echo "y" | yarn strapi import -f ./data/export_20250116105447.tar.gz --force'
 ```
 
-### Database Access
+### Bước 3: Truy cập và Trải nghiệm
+Mở trình duyệt và truy cập vào các đường dẫn sau *(thay `localhost` bằng IP VPS nếu chạy trên máy chủ)*:
 
-- **Adminer**: [http://localhost:8080](http://localhost:8080)
-- **Server**: `strapiDB`
-- **Username/Password**: See your `.env` file (`strapi` / `postgres`)
+- 🌐 **Giao diện Người dùng (Frontend):** [http://localhost:3000](http://localhost:3000)
+- 🛠️ **Trang Quản trị Nội dung (Strapi Admin):** [http://localhost:1337/admin](http://localhost:1337/admin)
+- 🗄️ **Quản trị Cơ sở dữ liệu (Adminer):** [http://localhost:8080](http://localhost:8080)
+- 📖 **Tài liệu API (Swagger):** [http://localhost:1337/documentation/v1.0.0](http://localhost:1337/documentation/v1.0.0)
 
----
-
-## 📝 Best Practices & Knowledge base
-
-- **Image URL Logic**: We use `NEXT_PUBLIC_STRAPI_URL` to ensure the browser loads images from the correct endpoint, bypassing Docker's internal networking issues.
-- **Port Management**: Both Local and Docker use `3000` for Frontend and `1337` for Backend to ensure consistency.
-- **Git Hygiene**:
-  - Don't commit `.env` files.
-  - `src/extensions/documentation` files can be committed if you want to track API changes, or ignored if you want Strapi to auto-generate them.
+*(Tài khoản đăng nhập quản trị CMS được cung cấp riêng hoặc bạn có thể tự tạo trong lần truy cập đầu tiên).*
 
 ---
 
-## Features Overview ✨
+## 💻 Dành cho Đội ngũ Kỹ thuật (Developer Guide)
 
-- **Next.js 15+ & Strapi 5**: Cutting edge tech stack.
-- **Dynamic Zones**: Build complex pages with reusable blocks.
-- **SEO Optimized**: Pre-configured SEO component and metadata handling.
-- **Multi-lingual**: Full i18n support.
+Phần này tóm tắt các quy trình vận hành và kỹ thuật cốt lõi của dự án.
 
----
+### 1. Quy trình Phát triển (Local Development)
+Chế độ Local kết hợp sức mạnh của NodeJS (Hot-reload) và Docker (Cô lập Database).
+1. Khởi động DB: `docker compose up -d launchpad-db launchpad-adminer`
+2. Cài đặt thư viện: `yarn setup`
+3. Khởi chạy Dev Server: `yarn dev` (Khởi động song song cả Next.js và Strapi).
 
-## Resources
+### 2. Quy trình Triển khai (Production Deployment)
+Toàn bộ hướng dẫn triển khai hệ thống lên VPS (Bao gồm thiết lập Docker Registry, cấu hình Nginx Proxy, và quản lý SSL) đã được tách riêng thành một tài liệu chi tiết.
 
-- [Strapi Documentation](https://docs.strapi.io)
-- [Next.js Documentation](https://nextjs.org/docs)
-- [**API & Frontend-Backend Guide**](./DOCS_API.md) 🚀
+👉 **[Xem Hướng dẫn Triển khai VPS (DEPLOY.md)](./DEPLOY.md)**
 
-[Docs](https://docs.strapi.io) • [Discord](https://discord.strapi.io) • [YouTube](https://www.youtube.com/c/Strapi/featured) • [Strapi Design System](https://design-system.strapi.io/) • [Marketplace](https://market.strapi.io/) • [Cloud Free Trial](https://cloud.strapi.io)
+### 3. Kiến trúc Mạng & Nginx Proxy
+Để tiết kiệm tài nguyên và dễ quản lý nhiều tên miền trên cùng một VPS:
+- Frontend và Backend giao tiếp kín qua mạng ảo Docker (`http://strapi:1337`).
+- Hệ thống đẩy toàn bộ traffic ra ngoài qua một container **Nginx CMS ở cổng `8000`**.
+- Bạn cần sử dụng hệ sinh thái **LaunchPad Registry Stack (Nginx UI)** để làm Proxy trỏ Tên miền (Domain) và cấp phát chứng chỉ HTTPS vào cổng `8000` này.
 
----
-
-## 🌌 The LaunchPad Ecosystem
-
-This project is part of the **LaunchPad** ecosystem—a complete suite of boilerplates designed for high-performance, production-ready development. Check out the other repositories to complete your stack:
-
-- 📱 [**LaunchPad Mobile Native**](https://github.com/tuquet/launchpad-mobile-native): A React Native/Expo mobile app boilerplate configured for seamless Strapi integration.
-- 💻 [**LaunchPad CMS Fullstack**](https://github.com/tuquet/launchpad-cms-fullstack): A full-stack starter kit combining Next.js (Frontend) and Strapi 5 (Headless CMS) with Docker support.
-- 🐳 [**LaunchPad Registry Stack**](https://github.com/tuquet/launchpad-registry-stack): A lightweight, self-hosted private Docker Registry with Web UI to streamline your CI/CD and save VPS resources.
-
-⭐️ **If you find this ecosystem useful, please consider giving the repositories a star on GitHub!**
+### 4. Giao tiếp API & Caching
+- **Bảo mật API:** Next.js dùng `API Token` (Bearer) cấu hình trong `.env` để fetch dữ liệu riêng tư.
+- **Next.js Caching:** Các API request đều được Next.js lưu cache. Khi sửa nội dung trên Strapi, Strapi sẽ tự động bắn Webhook để Next.js thực hiện lệnh `revalidate` làm mới giao diện ngay tức thì.
 
 ---
 
-## Customization
+## 🌌 Hệ sinh thái LaunchPad
 
-- The Strapi application contains a custom population middlewares in every api route.
+Dự án này là một phần của hệ sinh thái **LaunchPad** — Bộ giải pháp toàn diện cho các dự án khởi nghiệp và doanh nghiệp:
 
-- The Strapi application contains a postinstall script that will regenerate an uuid for the project in order to get some anonymous usage information concerning this demo. You can disable it by removing the uuid inside the `./strapi/packages.json` file.
+- 💻 [**LaunchPad CMS Fullstack**](https://github.com/tuquet/launchpad-cms-fullstack): Core Backend & Website.
+- 📱 [**LaunchPad Mobile Native**](https://github.com/tuquet/launchpad-mobile-native): App React Native / Expo tích hợp sẵn với Strapi.
+- 🐳 [**LaunchPad Registry Stack**](https://github.com/tuquet/launchpad-registry-stack): Hệ thống Private Docker Registry + Nginx UI để triển khai CI/CD tối ưu chi phí VPS.
 
-- The Strapi application contains a patch for the @strapi/admin package. It is only necessary for the hosted demos since we automatically create the Super Admin users for them when they request this demo on our website.
+⭐️ **Nếu bạn thấy hệ sinh thái này hữu ích, hãy ủng hộ bằng cách thả Star trên GitHub nhé!**
