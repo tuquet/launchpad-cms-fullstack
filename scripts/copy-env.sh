@@ -73,22 +73,25 @@ for TARGET_DIR in "${PATHS[@]}"; do
     continue
   fi
 
+  SKIP_COPY=0
   if [ -f "$ENV_PATH" ] && [ $FORCE -eq 0 ]; then
-    echo "  ⏩ [Skip] .env already exists. Use --force to overwrite."
-    continue
+    echo "  ⏩ [Skip] .env already exists. Secrets and variables are kept intact."
+    SKIP_COPY=1
   fi
 
-  # 1. Copy example → .env
-  cp "$EXAMPLE_PATH" "$ENV_PATH"
+  if [ $SKIP_COPY -eq 0 ]; then
+    # 1. Copy example → .env
+    cp "$EXAMPLE_PATH" "$ENV_PATH"
 
-  # 2. Replace placeholder secrets
-  if command -v perl &> /dev/null; then
-    perl -pi -e 's/tobemodified[a-zA-Z0-9_]*/qx(openssl rand -base64 32 | tr -d "\n")/gie' "$ENV_PATH"
-  else
-    echo "  ⚠️ [Warning] Perl not found. Using sed fallback (same secret for all)."
-    SECRET=$(openssl rand -base64 32 | tr -d '\n' | sed 's/[\/&]/\\&/g')
-    sed -i.bak "s/tobemodified[a-zA-Z0-9_]*/$SECRET/gi" "$ENV_PATH"
-    rm -f "$ENV_PATH.bak"
+    # 2. Replace placeholder secrets
+    if command -v perl &> /dev/null; then
+      perl -pi -e 's/tobemodified[a-zA-Z0-9_]*/qx(openssl rand -base64 32 | tr -d "\n")/gie' "$ENV_PATH"
+    else
+      echo "  ⚠️ [Warning] Perl not found. Using sed fallback (same secret for all)."
+      SECRET=$(openssl rand -base64 32 | tr -d '\n' | sed 's/[\/&]/\\&/g')
+      sed -i.bak "s/tobemodified[a-zA-Z0-9_]*/$SECRET/gi" "$ENV_PATH"
+      rm -f "$ENV_PATH.bak"
+    fi
   fi
 
   # 3. Inject COMPOSE_FILE (chỉ cho Root .env)
@@ -106,7 +109,11 @@ for TARGET_DIR in "${PATHS[@]}"; do
     } > "$ENV_PATH.tmp" && mv "$ENV_PATH.tmp" "$ENV_PATH"
   fi
 
-  echo "  ✅ [Success] Created .env with fresh random secrets at $ENV_PATH"
+  if [ $SKIP_COPY -eq 0 ]; then
+    echo "  ✅ [Success] Created .env with fresh random secrets at $ENV_PATH"
+  else
+    echo "  ✅ [Success] Updated COMPOSE_FILE=$COMPOSE_FILE_VALUE in $ENV_PATH"
+  fi
 done
 
 echo ""
