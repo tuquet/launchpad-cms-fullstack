@@ -91,7 +91,49 @@ docker compose up -d
 
 ---
 
-## 💾 3. Data Management
+## 🚀 3. VPS Production Deployment
+
+_Deploy lên VPS không cần build, chỉ pull images từ Private Registry._
+
+### Setup lần đầu
+
+Script tự động tạo `.env`, generate secrets, và set `COMPOSE_FILE=compose.prod.yml`:
+
+```bash
+# Linux/VPS
+bash scripts/copy-env.sh --env prod
+
+# Windows (PowerShell)
+powershell -ExecutionPolicy Bypass -File .\scripts\copy-env.ps1 -Env prod
+```
+
+Sau đó chỉ cần:
+
+```bash
+docker login <REGISTRY_IP>:5000
+docker compose up -d          # ← Không cần -f compose.prod.yml nữa!
+```
+
+### Chuyển đổi môi trường
+
+| Lệnh | Kết quả |
+| :--- | :--- |
+| `bash scripts/copy-env.sh --env dev --force` | Chuyển về dev (`compose.yml`) |
+| `bash scripts/copy-env.sh --env prod --force` | Chuyển sang prod (`compose.prod.yml`) |
+
+> **How it works:** Script inject `COMPOSE_FILE=<value>` vào `.env`. Docker Compose tự động đọc biến này nên không cần flag `-f` nữa.
+
+### Cập nhật version mới
+
+```bash
+# Sửa IMAGE_TAG trong .env (vd: latest -> v2), rồi:
+docker compose pull
+docker compose up -d
+```
+
+---
+
+## 💾 4. Data Management
 
 ### Seeding (Import Demo Data)
 

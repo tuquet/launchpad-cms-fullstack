@@ -21,7 +21,7 @@ graph TD
 
 ## ⚙️ Hướng dẫn Cấu hình trên Nginx UI
 
-Sau khi bạn đã chạy lệnh `docker compose -f compose.prod.yml up -d` thành công trên VPS, hãy làm theo các bước sau để cấu hình domain cho website của bạn:
+Sau khi bạn đã chạy lệnh `docker compose up -d` thành công trên VPS, hãy làm theo các bước sau để cấu hình domain cho website của bạn:
 
 1. Đăng nhập vào **Nginx UI** (Bảng điều khiển Nginx của hệ sinh thái DevOps).
 2. Vào mục **Sites** -> Nhấn **Add Site**.

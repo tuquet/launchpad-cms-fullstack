@@ -2,15 +2,16 @@
 # Production Docker Compose - Chạy trên VPS
 # Chỉ PULL images từ Registry, KHÔNG build tại VPS
 #
-# Cách dùng:
-#   1. Copy file này + .env + nginx/ lên VPS
-#   2. docker login <REGISTRY_IP>:5000
-#   3. docker compose -f compose.prod.yml up -d
+# Setup lần đầu:
+#   1. Copy project lên VPS
+#   2. bash scripts/copy-env.sh --env prod    (tự set COMPOSE_FILE=compose.prod.yml)
+#   3. docker login <REGISTRY_IP>:5000
+#   4. docker compose up -d                   (không cần -f nữa!)
 #
 # Cập nhật version mới:
-#   1. Sửa tag image (vd: latest -> v2)
-#   2. docker compose -f compose.prod.yml pull
-#   3. docker compose -f compose.prod.yml up -d
+#   1. Sửa tag IMAGE_TAG trong .env (vd: latest -> v2)
+#   2. docker compose pull
+#   3. docker compose up -d
 # =============================================================================
 
 services:
