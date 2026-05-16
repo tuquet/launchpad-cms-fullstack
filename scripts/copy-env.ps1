@@ -21,10 +21,10 @@ param(
   [string[]]$Paths = @(".")
 )
 
-# ── Strict Mode ──────────────────────────────────────────────────────────────
+# -- Strict Mode --------------------------------------------------------------
 $ErrorActionPreference = "Stop"
 
-# ── Helper: Generate Random Secret ──────────────────────────────────────────
+# -- Helper: Generate Random Secret ------------------------------------------
 function New-Secret {
   param([int]$Bytes = 32)
   $randomBytes = New-Object byte[] $Bytes
@@ -32,7 +32,7 @@ function New-Secret {
   return [Convert]::ToBase64String($randomBytes)
 }
 
-# ── Compose File Mapping ────────────────────────────────────────────────────
+# -- Compose File Mapping ----------------------------------------------------
 $composeFileMap = @{
   "dev"  = "compose.yml"
   "prod" = "compose.prod.yml"
@@ -40,33 +40,33 @@ $composeFileMap = @{
 $composeFileValue = $composeFileMap[$Env]
 
 Write-Host ""
-Write-Host "🔧 Environment: $Env → COMPOSE_FILE=$composeFileValue" -ForegroundColor Cyan
+Write-Host "[CONFIG] Environment: $Env -> COMPOSE_FILE=$composeFileValue" -ForegroundColor Cyan
 
-# ── Process Each Directory ───────────────────────────────────────────────────
+# -- Process Each Directory ---------------------------------------------------
 foreach ($targetDir in $Paths) {
   Write-Host ""
 
   $absoluteDir = Resolve-Path -Path $targetDir -ErrorAction SilentlyContinue
   if (-not $absoluteDir) {
-    Write-Host "  ❌ [Error] Directory not found: $targetDir" -ForegroundColor Red
+    Write-Host "  [ERROR] Directory not found: $targetDir" -ForegroundColor Red
     continue
   }
 
   $dirName = if ($targetDir -eq ".") { "Root" } else { Split-Path $absoluteDir -Leaf }
-  Write-Host "--- 📂 Processing Environment: $dirName ---"
+  Write-Host "--- [PROCESSING] Environment: $dirName ---"
 
   $examplePath = Join-Path $absoluteDir ".env.example"
   $envPath     = Join-Path $absoluteDir ".env"
 
   # 1. Check .env.example exists
   if (-not (Test-Path $examplePath)) {
-    Write-Host "  ❌ [Error] .env.example not found at: $examplePath" -ForegroundColor Red
+    Write-Host "  [ERROR] .env.example not found at: $examplePath" -ForegroundColor Red
     continue
   }
 
   # 2. Check .env already exists
   if ((Test-Path $envPath) -and -not $Force) {
-    Write-Host "  ⏩ [Skip] .env already exists. Use -Force to overwrite." -ForegroundColor Yellow
+    Write-Host "  [SKIP] .env already exists. Use -Force to overwrite." -ForegroundColor Yellow
     continue
   }
 
@@ -91,11 +91,11 @@ foreach ($targetDir in $Paths) {
 
   # 5. Write .env
   $content | Set-Content -Path $envPath -NoNewline -Encoding UTF8
-  Write-Host "  ✅ [Success] Created .env with $replacementCount fresh random secrets." -ForegroundColor Green
+  Write-Host "  [SUCCESS] Created .env with $replacementCount fresh random secrets." -ForegroundColor Green
 }
 
 Write-Host ""
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Green
-Write-Host "🎉 Done! Ban gio chi can go: docker compose ps" -ForegroundColor Green
+Write-Host "======================================================" -ForegroundColor Green
+Write-Host "[SUCCESS] Done! Ban gio chi can go: docker compose ps" -ForegroundColor Green
 Write-Host "   (khong can -f $composeFileValue nua)" -ForegroundColor Green
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Green
+Write-Host "======================================================" -ForegroundColor Green

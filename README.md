@@ -139,12 +139,15 @@ docker compose up -d
 
 To populate your instance with the provided demo content:
 
+#### Local Dev
 ```powershell
-# If running Local Dev
-cd strapi && yarn seed
+yarn setup:seed
+```
 
-# If running in Docker (Windows users MUST use -u root)
-docker exec -it -u root strapi yarn seed
+#### Production / Docker (VPS)
+Run the following command to securely seed data inside the running container (Cách 1 - An toàn nhất):
+```bash
+docker compose exec strapi sh -c 'echo "y" | yarn strapi import -f ./data/export_20250116105447.tar.gz --force'
 ```
 
 ### Database Access
