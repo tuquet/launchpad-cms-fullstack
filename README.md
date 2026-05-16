@@ -85,8 +85,8 @@ If the Strapi Admin UI shows blank/broken pages, it's likely a hydration issue. 
 
 ```powershell
 docker compose down -v
-docker-compose build --no-cache
-docker-compose up -d
+docker compose build --no-cache
+docker compose up -d
 ```
 
 ---

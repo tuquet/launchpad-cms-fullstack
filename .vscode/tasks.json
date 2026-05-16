@@ -235,7 +235,7 @@
     {
       "label": "🚀 docker compose: prod-up",
       "type": "shell",
-      "command": "docker compose -f docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml up -d",
+      "command": "docker compose -f compose.prod.yml pull && docker compose -f compose.prod.yml up -d",
       "presentation": {
         "reveal": "always",
         "panel": "new",
@@ -250,7 +250,7 @@
     {
       "label": "🛑 docker compose: prod-down",
       "type": "shell",
-      "command": "docker compose -f docker-compose.prod.yml down",
+      "command": "docker compose -f compose.prod.yml down",
       "presentation": {
         "reveal": "always",
         "panel": "new",
@@ -265,7 +265,7 @@
     {
       "label": "📜 docker compose: prod-logs",
       "type": "shell",
-      "command": "docker compose -f docker-compose.prod.yml logs -f",
+      "command": "docker compose -f compose.prod.yml logs -f",
       "presentation": {
         "reveal": "always",
         "panel": "new",

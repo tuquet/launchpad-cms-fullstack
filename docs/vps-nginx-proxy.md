@@ -1,6 +1,6 @@
 # 🌐 Cấu hình Nginx Reverse Proxy (VPS)
 
-Khi triển khai LaunchPad CMS lên VPS bằng `docker-compose.prod.yml`, một container `nginx` sẽ được khởi tạo đi kèm để làm nhiệm vụ Reverse Proxy chia tải nội bộ cho Next.js và Strapi. 
+Khi triển khai LaunchPad CMS lên VPS bằng `compose.prod.yml`, một container `nginx` sẽ được khởi tạo đi kèm để làm nhiệm vụ Reverse Proxy chia tải nội bộ cho Next.js và Strapi. 
 
 Tuy nhiên, thay vì chiếm dụng cổng `80` và `443` của hệ thống, container Nginx này được cấu hình đẩy ra cổng `8000`. Điều này cho phép hệ sinh thái DevOps (chạy Nginx UI) có thể làm Proxy cấp 1, nhận request từ Domain và đẩy vào cổng `8000`.
 
@@ -21,7 +21,7 @@ graph TD
 
 ## ⚙️ Hướng dẫn Cấu hình trên Nginx UI
 
-Sau khi bạn đã chạy lệnh `docker compose -f docker-compose.prod.yml up -d` thành công trên VPS, hãy làm theo các bước sau để cấu hình domain cho website của bạn:
+Sau khi bạn đã chạy lệnh `docker compose -f compose.prod.yml up -d` thành công trên VPS, hãy làm theo các bước sau để cấu hình domain cho website của bạn:
 
 1. Đăng nhập vào **Nginx UI** (Bảng điều khiển Nginx của hệ sinh thái DevOps).
 2. Vào mục **Sites** -> Nhấn **Add Site**.
