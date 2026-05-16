@@ -25,11 +25,11 @@ Hệ thống được thiết kế theo chuẩn **B2B SaaS Enterprise**, đóng 
 Dự án đã tích hợp sẵn Script cấu hình tự động. Bạn mở Terminal và gõ:
 
 ```bash
-# 1. Sinh file cấu hình và mật khẩu ngẫu nhiên
-bash scripts/copy-env.sh --env prod
+# 1. Sinh file cấu hình và mật khẩu ngẫu nhiên cho môi trường trải nghiệm
+bash scripts/copy-env.sh --env dev
 
-# 2. Khởi động hệ thống (Docker sẽ tự tải các phần mềm cần thiết)
-docker compose up -d
+# 2. Khởi động hệ thống (Docker sẽ tự Build các phần mềm từ mã nguồn)
+docker compose up -d --build
 ```
 
 ### Bước 2: Nạp dữ liệu mẫu (Demo Data)
