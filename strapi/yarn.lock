@@ -7150,6 +7150,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"csv-parse@npm:^6.2.1":
+  version: 6.2.1
+  resolution: "csv-parse@npm:6.2.1"
+  checksum: 10c0/8b6f14b244ca62476d4217aac721131ba0ada3e4ed7614e43ebc99203807564dcb054144d1de4ef22ee8b0c63b431640f75d46a0e1e0f72853a954b279ba1c61
+  languageName: node
+  linkType: hard
+
 "custom-media-element@npm:~1.3.1":
   version: 1.3.3
   resolution: "custom-media-element@npm:1.3.3"
@@ -14414,6 +14421,7 @@ __metadata:
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
     better-sqlite3: "npm:11.7.0"
+    csv-parse: "npm:^6.2.1"
     pg: "npm:^8.20.0"
     pluralize: "npm:^8.0.0"
     react: "npm:^18.0.0"
