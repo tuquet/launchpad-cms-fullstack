@@ -21,11 +21,11 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "5.38.0",
-    "@strapi/plugin-documentation": "5.38.0",
+    "@strapi/plugin-cloud": "5.46.0",
+    "@strapi/plugin-documentation": "5.46.0",
     "@strapi/plugin-seo": "^2.0.4",
-    "@strapi/plugin-users-permissions": "5.38.0",
-    "@strapi/strapi": "5.38.0",
+    "@strapi/plugin-users-permissions": "5.46.0",
+    "@strapi/strapi": "5.46.0",
     "better-sqlite3": "11.7.0",
     "pg": "^8.20.0",
     "pluralize": "^8.0.0",

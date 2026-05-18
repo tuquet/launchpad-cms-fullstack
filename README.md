@@ -70,6 +70,7 @@ Chế độ Local kết hợp sức mạnh của NodeJS (Hot-reload) và Docker 
 
 👉 **[Xem Hướng dẫn Local Development Chi tiết (docs/LOCAL_DEV.md)](./docs/LOCAL_DEV.md)**
 
+👉 **[Xem Hướng dẫn Nâng cấp Strapi (docs/UPGRADE_STRAPI.md)](./docs/UPGRADE_STRAPI.md)**
 
 ### 2. Quy trình Triển khai (Production Deployment)
 Toàn bộ hướng dẫn triển khai hệ thống lên VPS (Bao gồm thiết lập Docker Registry, cấu hình Nginx Proxy, và quản lý SSL) đã được tách riêng thành một tài liệu chi tiết.
