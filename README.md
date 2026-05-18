@@ -68,6 +68,9 @@ Chế độ Local kết hợp sức mạnh của NodeJS (Hot-reload) và Docker 
 2. Cài đặt thư viện: `yarn setup`
 3. Khởi chạy Dev Server: `yarn dev` (Khởi động song song cả Next.js và Strapi).
 
+👉 **[Xem Hướng dẫn Local Development Chi tiết (docs/LOCAL_DEV.md)](./docs/LOCAL_DEV.md)**
+
+
 ### 2. Quy trình Triển khai (Production Deployment)
 Toàn bộ hướng dẫn triển khai hệ thống lên VPS (Bao gồm thiết lập Docker Registry, cấu hình Nginx Proxy, và quản lý SSL) đã được tách riêng thành một tài liệu chi tiết.
 
