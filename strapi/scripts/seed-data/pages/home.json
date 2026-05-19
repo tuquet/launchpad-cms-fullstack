@@ -1,0 +1,89 @@
+{
+  "_comment": "Homepage — dynamic_zone relations (testimonials, faqs, plans) sẽ được inject tự động bởi seeder sau khi seed xong các collection type.",
+  "slug": "home",
+  "seo": {
+    "metaTitle": "LaunchPad — Modern SaaS for Growing Teams",
+    "metaDescription": "LaunchPad helps businesses scale faster with analytics, marketing automation, and design tools. Start your free trial today."
+  },
+  "dynamic_zone": [
+    {
+      "__component": "dynamic-zone.hero",
+      "heading": "Build faster. Scale smarter.",
+      "sub_heading": "The all-in-one platform that empowers your team with analytics, automation, and design tools to drive real growth.",
+      "CTAs": [
+        { "text": "Start Free Trial", "URL": "/sign-up", "variant": "primary" },
+        { "text": "View Products", "URL": "/products", "variant": "outline" }
+      ]
+    },
+    {
+      "__component": "dynamic-zone.features",
+      "heading": "Everything you need to grow",
+      "sub_heading": "Powerful features designed for modern teams.",
+      "globe_card": {
+        "title": "Global Analytics",
+        "description": "Track your metrics across regions and time zones with real-time dashboards.",
+        "span": "two"
+      },
+      "ray_card": {
+        "title": "Lightning Fast",
+        "description": "Sub-100ms response times with edge-optimized infrastructure.",
+        "before_ray_items": { "item_1": "99.99%", "item_2": "Uptime", "item_3": "SLA" },
+        "after_ray_items": { "item_1": "<100ms", "item_2": "Response", "item_3": "Time" },
+        "span": "one"
+      },
+      "graph_card": {
+        "title": "Growth Metrics",
+        "description": "Visualize your growth with beautiful, interactive charts and reports.",
+        "top_items": [
+          { "number": "10M+", "text": "Events Processed" },
+          { "number": "5K+", "text": "Active Teams" },
+          { "number": "99.9%", "text": "Accuracy" }
+        ],
+        "highlighted_text": "+127% MoM Growth",
+        "span": "one"
+      },
+      "social_media_card": {
+        "Title": "Integrations",
+        "Description": "Connect with the tools your team already loves.",
+        "span": "two"
+      }
+    },
+    {
+      "__component": "dynamic-zone.how-it-works",
+      "heading": "Get started in 3 easy steps",
+      "sub_heading": "From sign-up to insights in under 5 minutes.",
+      "steps": [
+        { "title": "Create your account", "description": "Sign up for free in seconds. No credit card required." },
+        { "title": "Connect your data", "description": "Integrate your existing tools with our one-click connectors or REST API." },
+        { "title": "Get actionable insights", "description": "Start seeing real-time analytics and automated reports immediately." }
+      ]
+    },
+    {
+      "__component": "dynamic-zone.pricing",
+      "heading": "Simple, transparent pricing",
+      "sub_heading": "No hidden fees. No surprises. Pick the plan that fits your team.",
+      "_plans_ref": "INJECT_PLAN_IDS"
+    },
+    {
+      "__component": "dynamic-zone.testimonials",
+      "heading": "Loved by teams worldwide",
+      "sub_heading": "See what our customers have to say about LaunchPad.",
+      "_testimonials_ref": "INJECT_TESTIMONIAL_IDS"
+    },
+    {
+      "__component": "dynamic-zone.faq",
+      "heading": "Frequently asked questions",
+      "sub_heading": "Can't find the answer you're looking for? Reach out to our support team.",
+      "_faqs_ref": "INJECT_FAQ_IDS"
+    },
+    {
+      "__component": "dynamic-zone.cta",
+      "heading": "Ready to get started?",
+      "sub_heading": "Join thousands of teams that are already using LaunchPad to grow their business.",
+      "CTAs": [
+        { "text": "Start Free Trial", "URL": "/sign-up", "variant": "primary" },
+        { "text": "Contact Sales", "URL": "/contact", "variant": "outline" }
+      ]
+    }
+  ]
+}

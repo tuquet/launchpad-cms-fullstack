@@ -1,0 +1,40 @@
+{
+  "admin_title": "LaunchPad CMS",
+  "add_to_cart": "Add to cart",
+  "your_cart": "Your cart",
+  "buy_now": "Buy now",
+  "seo": {
+    "metaTitle": "LaunchPad — Modern SaaS for Growing Teams",
+    "metaDescription": "LaunchPad helps businesses scale faster with analytics, marketing automation, and design tools. Start your free trial today."
+  },
+  "navbar": {
+    "left_navbar_items": [
+      { "text": "Products", "URL": "/products", "target": "_self" },
+      { "text": "Blog", "URL": "/blog", "target": "_self" },
+      { "text": "Pricing", "URL": "/pricing", "target": "_self" }
+    ],
+    "right_navbar_items": [
+      { "text": "Sign Up", "URL": "/sign-up", "target": "_self" }
+    ]
+  },
+  "footer": {
+    "description": "Build better products with data-driven decisions. LaunchPad empowers your team with the tools they need to grow.",
+    "copyright": "© 2025 LaunchPad. All rights reserved.",
+    "designed_developed_by": "LaunchPad Team",
+    "built_with": "Strapi & Next.js",
+    "internal_links": [
+      { "text": "Products", "URL": "/products", "target": "_self" },
+      { "text": "Blog", "URL": "/blog", "target": "_self" },
+      { "text": "Pricing", "URL": "/pricing", "target": "_self" }
+    ],
+    "policy_links": [
+      { "text": "Privacy Policy", "URL": "/privacy", "target": "_self" },
+      { "text": "Terms of Service", "URL": "/terms", "target": "_self" }
+    ],
+    "social_media_links": [
+      { "text": "Twitter", "URL": "https://twitter.com", "target": "_blank" },
+      { "text": "LinkedIn", "URL": "https://linkedin.com", "target": "_blank" },
+      { "text": "GitHub", "URL": "https://github.com", "target": "_blank" }
+    ]
+  }
+}

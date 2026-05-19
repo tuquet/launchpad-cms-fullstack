@@ -1,0 +1,78 @@
+[
+  {
+    "slug": "5-xu-huong-phan-tich-du-lieu-2025",
+    "content": [
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Năm 2025 đánh dấu một bước ngoặt lớn trong ngành phân tích dữ liệu. Các công nghệ mới không chỉ thay đổi cách chúng ta thu thập dữ liệu, mà còn cách chúng ta biến dữ liệu thô thành những quyết định kinh doanh có giá trị." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "1. AI-Powered Predictive Analytics" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Trí tuệ nhân tạo đang được tích hợp sâu hơn vào các nền tảng phân tích dữ liệu, cho phép dự đoán xu hướng với độ chính xác ngày càng cao. Không chỉ là phân tích quá khứ, AI giờ đây có thể dự đoán hành vi khách hàng, biến động thị trường và rủi ro kinh doanh." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "2. Real-Time Data Streaming" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Dữ liệu batch processing đang nhường chỗ cho real-time streaming. Các doanh nghiệp muốn nhìn thấy dữ liệu ngay khi nó xảy ra, không phải chờ đến cuối ngày hoặc cuối tuần." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "3. Data Democratization" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Self-service analytics đang trở thành tiêu chuẩn. Những công cụ no-code/low-code cho phép nhân viên không có kỹ năng kỹ thuật cũng có thể tạo báo cáo và phân tích dữ liệu một cách độc lập." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "4. Edge Analytics" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Với sự phát triển của IoT, việc xử lý dữ liệu tại edge (gần nguồn dữ liệu) giúp giảm độ trễ và chi phí bandwidth đáng kể." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "5. Privacy-First Analytics" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Khi các quy định về quyền riêng tư ngày càng nghiêm ngặt, các giải pháp phân tích dữ liệu đang chuyển sang mô hình privacy-first, sử dụng các kỹ thuật như differential privacy và federated learning." }] }
+    ]
+  },
+  {
+    "slug": "cach-xay-dung-dashboard-hieu-qua",
+    "content": [
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Dashboard là công cụ quan trọng giúp team non-technical hiểu dữ liệu một cách trực quan. Nhưng một dashboard kém thiết kế có thể gây nhầm lẫn hơn là giúp ích. Dưới đây là hướng dẫn xây dựng dashboard hiệu quả." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Nguyên tắc 1: Less is More" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Mỗi dashboard chỉ nên trả lời 3-5 câu hỏi kinh doanh cụ thể. Tránh nhồi nhét quá nhiều biểu đồ vào một trang. Nếu bạn cần hơn 8 biểu đồ, hãy chia thành nhiều dashboard." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Nguyên tắc 2: Chọn đúng loại biểu đồ" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Bar chart cho so sánh, line chart cho xu hướng, pie chart cho tỷ lệ (nhưng hạn chế sử dụng). KPI cards cho các con số quan trọng nhất." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Nguyên tắc 3: Thiết kế cho người dùng cuối" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Hãy phỏng vấn người dùng trước khi thiết kế. Họ cần biết gì? Họ ra quyết định gì dựa trên dữ liệu? Đây là bước quan trọng nhất mà nhiều team bỏ qua." }] }
+    ]
+  },
+  {
+    "slug": "ab-testing-bai-hoc-tu-1000-thi-nghiem",
+    "content": [
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Sau khi phân tích hơn 1000 thí nghiệm A/B testing từ các doanh nghiệp khác nhau, chúng tôi rút ra những bài học quan trọng mà bất kỳ marketer nào cũng nên biết." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Sai lầm #1: Sample size quá nhỏ" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Đây là sai lầm phổ biến nhất. Nhiều team kết luận quá sớm khi chưa đạt statistical significance. Hãy sử dụng các công cụ tính sample size trước khi bắt đầu thí nghiệm." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Sai lầm #2: Test quá nhiều biến cùng lúc" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Khi bạn thay đổi 5 thứ cùng lúc, bạn không biết cái nào thực sự tạo ra sự khác biệt. Hãy test từng biến một (hoặc sử dụng multivariate testing nếu có đủ traffic)." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Sai lầm #3: Bỏ qua mobile vs desktop" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Trải nghiệm trên mobile và desktop rất khác nhau. Một thay đổi có thể tăng conversion trên desktop nhưng giảm trên mobile. Luôn segment kết quả theo device." }] }
+    ]
+  },
+  {
+    "slug": "how-to-build-data-driven-culture",
+    "content": [
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Building a data-driven culture isn't just about buying the right tools — it's about changing how your organization thinks about decision-making at every level." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Start from the Top" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Leadership must model data-driven behavior. When executives ask 'What does the data say?' instead of relying on intuition, it sends a powerful signal throughout the organization." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Invest in Data Literacy" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Not everyone needs to be a data scientist, but everyone should be able to read a chart, understand basic statistics, and know when to question the data. Invest in training programs." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Make Data Accessible" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "If people can't easily access the data they need, they won't use it. Self-service analytics tools, well-organized data catalogs, and clear documentation are essential." }] }
+    ]
+  },
+  {
+    "slug": "complete-guide-marketing-automation-2025",
+    "content": [
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Marketing automation has evolved far beyond simple email drip campaigns. In 2025, it's about creating personalized, multi-channel experiences that nurture leads and delight customers at scale." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "The Modern Automation Stack" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "A modern marketing automation setup includes email marketing, SMS campaigns, social media scheduling, lead scoring, CRM integration, and analytics — all working together seamlessly." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Setting Up Your First Workflow" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Start simple. A welcome email series is the perfect first automation workflow. Map out the customer journey, identify key touchpoints, and create content for each stage." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Measuring ROI" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Track metrics that matter: conversion rates, customer lifetime value, and cost per acquisition. Don't get distracted by vanity metrics like open rates alone." }] }
+    ]
+  },
+  {
+    "slug": "design-systems-why-your-team-needs-one",
+    "content": [
+      { "type": "paragraph", "children": [{ "type": "text", "text": "A design system is more than a component library — it's a shared language between designers and developers that ensures consistency, speeds up development, and reduces design debt." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "The Cost of Inconsistency" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Without a design system, teams waste hours recreating similar components, debating spacing values, and fixing visual inconsistencies. Studies show this can account for up to 30% of design and frontend development time." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Building Your Foundation" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "Start with design tokens: colors, typography, spacing, and shadows. These foundational elements should be defined once and used everywhere. Tools like Figma tokens and CSS custom properties make this practical." }] },
+      { "type": "heading", "level": 2, "children": [{ "type": "text", "text": "Adoption is Everything" }] },
+      { "type": "paragraph", "children": [{ "type": "text", "text": "The best design system in the world is useless if nobody uses it. Documentation, onboarding, and governance are just as important as the components themselves." }] }
+    ]
+  }
+]
